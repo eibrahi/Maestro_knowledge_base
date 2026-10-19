@@ -194,5 +194,43 @@ Für die Überwachung von **LLM-Anwendungen** sind folgende Metriken entscheiden
 - 🤖 **Kleinere Modelle einsetzen**
   - Überprüfen, ob sich Kosten und Latenz tatsächlich reduzieren.
 
+# 🔍 Observability Tools and Platforms
+
+### 🛠️ Zentrale Observability-Funktionen
+
+Die drei wichtigsten Funktionen von **Observability-Plattformen** lassen sich klar unterscheiden und unterschiedlichen **Use Cases** zuordnen:
+
+- 🔗 **Tracing**
+  - Nachverfolgung einzelner Requests durch die gesamte Pipeline.
+  - **Use Case:** Identifikation von Bottlenecks und Fehlerquellen.
+
+- 📊 **Dashboards**
+  - Visualisierung und Überwachung wichtiger Systemmetriken.
+  - **Use Case:** Analyse von Performance, Kosten und Systemzustand.
+
+- 🚨 **Alerting**
+  - Automatische Benachrichtigungen bei definierten Abweichungen oder Problemen.
+  - **Use Case:** Frühzeitige Erkennung von Fehlern, erhöhten Kosten oder Performance-Problemen.
+
+### ⚙️ Kernkriterien für die Plattformwahl
+
+Bei der Auswahl einer **Observability-Plattform** sind drei zentrale Kriterien entscheidend:
+
+- 🔌 **Integration Ease**
+  - Einfachheit der Integration in bestehende Anwendungen und Systeme.
+
+- 🤖 **Supported Models**
+  - Unterstützung der eingesetzten LLMs und AI-Frameworks.
+
+- 🗄️ **Data Retention**
+  - Aufbewahrungsdauer von Logs, Traces und Metriken.
+
+Die Kriterien sollten abhängig von den **Projektanforderungen pragmatisch priorisiert** werden.
+
+### 🎯 Langfristige Bedeutung
+
+- Konkrete **Observability-Tools und Plattformen** verändern sich im Laufe der Zeit.
+- Die grundlegenden **Konzepte und Evaluationskriterien** bleiben jedoch stabil.
+- Dieses Wissen ist auf unterschiedliche **LLM-Anwendungen, RAG-Systeme und AI Agents** übertragbar.
 - 📝 **Kontext reduzieren**
   - Analysieren, ob weniger Kontext zu einem geringeren Tokenverbrauch und besseren Antwortzeiten führt.
