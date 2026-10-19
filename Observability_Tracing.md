@@ -24,3 +24,29 @@ GenAI benötigt eigene **Debugging-Strategien**, die folgende Aspekte berücksic
 - 🔄 **Multiple Runs** → Analyse über mehrere Durchläufe
 - 📊 **Mustererkennung** → Identifikation wiederkehrender Verhaltensweisen
 - ⚙️ **Prompt- und Parameter-Design** → Systematische Optimierung von Prompts und Modellparametern
+
+# 🔍 What is Observability in LLM Apps?
+
+### 📊 Observability
+
+- **Observability** bezeichnet die Fähigkeit, anhand von **Logs, Metriken und Traces** zu verstehen, *warum* sich ein **LLM-System** auf eine bestimmte Weise verhält.
+
+### 📝 Logging
+
+- **Detaillierte Informationen pro Request**:
+  - 📥 **Prompt** → Eingabe an das LLM
+  - 📤 **Response** → Generierte Antwort
+  - 🔢 **Tokens** → Tokenverbrauch
+  - 🤖 **Model-Version** → Verwendete Modellversion
+  - ⚠️ **Errors** → Aufgetretene Fehler
+
+### 📈 Monitoring
+
+- **Aggregierte Sicht auf die Gesundheit und Performance des Systems**:
+  - ⏱️ **Latenz** → Antwortzeit des Systems
+  - 🚨 **Fehlerrate** → Häufigkeit auftretender Fehler
+  - 💰 **Tokenverbrauch** → Verbrauchte Tokens
+
+### 🔗 Tracing
+
+- **Tracing** ermöglicht die Nachverfolgung des **kompletten Ablaufs eines einzelnen Requests** durch den gesamten **LLM-Flow**.
