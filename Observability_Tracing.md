@@ -118,3 +118,34 @@ Eine zu starke Optimierung kann die **Qualität und Zuverlässigkeit** des LLM-S
   - **Exponential Backoff** → Wartezeit zwischen Wiederholungsversuchen schrittweise erhöhen:
     - `1s → 2s → 4s → 8s → …`
   - Optional **Jitter** hinzufügen, um gleichzeitige Wiederholungsversuche zu vermeiden.
+
+# 🔍 Tracing the Call Chain
+
+### 🔗 Request Trace
+
+- Ein **Request Trace** bildet die vollständige Spur **einer einzelnen Anfrage** durch alle Schritte der Pipeline ab.
+- Dadurch lässt sich nachvollziehen, welche Komponenten und Prozesse während der Verarbeitung durchlaufen werden.
+
+### ⏱️ Trace-Timeline & Bottleneck-Analyse
+
+- Eine **Trace-Timeline** visualisiert den zeitlichen Ablauf der einzelnen Verarbeitungsschritte.
+- Sie ermöglicht die schnelle Identifikation von **Bottlenecks (Engpässen)** innerhalb der Pipeline.
+- Dadurch wird sichtbar, **welcher Schritt die Performance beeinträchtigt**.
+
+### ⚠️ Typische Performance-Patterns
+
+- 🔍 **Langsames Retrieval**
+  - Die Suche und Bereitstellung relevanter Informationen benötigt zu viel Zeit.
+
+- 💰 **Teures Re-Ranking**
+  - Die erneute Bewertung und Sortierung abgerufener Dokumente verursacht hohen Zeit- oder Ressourcenaufwand.
+
+- 🔄 **Redundante API-Calls**
+  - Unnötige oder doppelte API-Aufrufe erhöhen Latenz und Kosten.
+  - Beispiel: **Doppeltes Retrieval** derselben Informationen.
+
+### 🤖 Bedeutung von Tracing bei RAG & AI Agents
+
+- Bei **RAG-Systemen und AI Agents** ist Tracing besonders wichtig, da eine Anfrage mehrere Verarbeitungsschritte und Komponenten durchläuft.
+- Im Gegensatz zu einem **einfachen LLM-Call** entstehen zusätzliche Abhängigkeiten und potenzielle Fehlerquellen.
+- **Tracing** ermöglicht es, diese Abläufe transparent nachzuvollziehen und gezielt zu optimieren.
