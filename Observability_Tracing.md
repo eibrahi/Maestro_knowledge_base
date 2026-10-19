@@ -50,3 +50,32 @@ GenAI benötigt eigene **Debugging-Strategien**, die folgende Aspekte berücksic
 ### 🔗 Tracing
 
 - **Tracing** ermöglicht die Nachverfolgung des **kompletten Ablaufs eines einzelnen Requests** durch den gesamten **LLM-Flow**.
+
+# 💰 Cost Optimization
+
+### 🧮 Berechnung der LLM-Kosten
+
+- **LLM-Kosten** werden anhand der verbrauchten **Input- und Output-Tokens** sowie der jeweiligen **Tokenpreise** berechnet.
+
+### ⚙️ Die drei wichtigsten Optimierungshebel
+
+- 📝 **Prompt kürzen**
+  - Unnötige Informationen entfernen.
+  - Wichtigen Kontext beibehalten.
+
+- 🤖 **Kleineres Modell verwenden**
+  - Für einfache Aufgaben wie beispielsweise **Umformulierungen** ein kleineres Modell einsetzen.
+
+- 🔄 **Caching einsetzen**
+  - Wiederholte oder identische Anfragen zwischenspeichern.
+  - Beispiel: **HR-FAQ** mit häufig gestellten Fragen.
+
+### ⚠️ Risiken bei der Kostenoptimierung
+
+Eine zu starke Optimierung kann die **Qualität und Zuverlässigkeit** des LLM-Systems beeinträchtigen.
+
+- 🔍 **Zu stark gekürzte Prompts**
+  - Bei komplexem Debugging können wichtige Informationen verloren gehen.
+
+- 🗄️ **Falsches Caching**
+  - Bei sich schnell ändernden Daten können veraltete oder unpassende Antworten zurückgegeben werden.
