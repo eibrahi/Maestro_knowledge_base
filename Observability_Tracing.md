@@ -149,3 +149,50 @@ Eine zu starke Optimierung kann die **Qualität und Zuverlässigkeit** des LLM-S
 - Bei **RAG-Systemen und AI Agents** ist Tracing besonders wichtig, da eine Anfrage mehrere Verarbeitungsschritte und Komponenten durchläuft.
 - Im Gegensatz zu einem **einfachen LLM-Call** entstehen zusätzliche Abhängigkeiten und potenzielle Fehlerquellen.
 - **Tracing** ermöglicht es, diese Abläufe transparent nachzuvollziehen und gezielt zu optimieren.
+
+# 📊 Monitoring Costs and Latency
+
+### 📈 Wichtige Monitoring-Metriken für LLM-Apps
+
+Für die Überwachung von **LLM-Anwendungen** sind folgende Metriken entscheidend:
+
+- 🔢 **Tokens/Request**
+  - Anzahl der verbrauchten Tokens pro Anfrage.
+
+- 💰 **Kosten/Request/Feature/Tag**
+  - Kosten pro einzelner Anfrage.
+  - Kosten aufgeschlüsselt nach **Features** und **Tags**.
+
+- ⏱️ **P50/P95/P99-Latenz**
+  - **P50 (Median)** → 50 % der Anfragen sind innerhalb dieser Zeit abgeschlossen.
+  - **P95** → 95 % der Anfragen sind innerhalb dieser Zeit abgeschlossen.
+  - **P99** → 99 % der Anfragen sind innerhalb dieser Zeit abgeschlossen.
+
+### ⚠️ Typische Warnsignale
+
+- 📝 **Zu große Prompts**
+  - Hoher **Tokenverbrauch pro Request** durch übermäßig lange Prompts.
+
+- 📈 **Steigende Kosten ohne zusätzlichen Traffic**
+  - Die Betriebskosten steigen, obwohl die Anzahl der Anfragen unverändert bleibt.
+
+- 🐢 **Long-Tail-Latenzprobleme**
+  - Einzelne Anfragen benötigen deutlich länger als der Durchschnitt.
+  - Besonders sichtbar bei **P95- und P99-Latenzen**.
+
+### 🛠️ Monitoring by Design
+
+- **Monitoring gehört von Anfang an in das Systemdesign** und sollte nicht erst nachträglich integriert werden.
+- Wichtige Bestandteile:
+  - 📏 **Baselines** → Referenzwerte für Kosten, Tokenverbrauch und Latenz.
+  - 🚨 **Alerts** → Automatische Benachrichtigungen bei auffälligen Abweichungen.
+
+### 🚀 Optimierungen durch Monitoring überprüfen
+
+- **Monitoring-Daten** ermöglichen die Bewertung und Validierung von Optimierungsmaßnahmen.
+
+- 🤖 **Kleinere Modelle einsetzen**
+  - Überprüfen, ob sich Kosten und Latenz tatsächlich reduzieren.
+
+- 📝 **Kontext reduzieren**
+  - Analysieren, ob weniger Kontext zu einem geringeren Tokenverbrauch und besseren Antwortzeiten führt.
