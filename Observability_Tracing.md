@@ -79,3 +79,42 @@ Eine zu starke Optimierung kann die **Qualität und Zuverlässigkeit** des LLM-S
 
 - 🗄️ **Falsches Caching**
   - Bei sich schnell ändernden Daten können veraltete oder unpassende Antworten zurückgegeben werden.
+
+# ⚡ Handling Latency and Rate Limits
+
+### ⏱️ LLM-Latenz
+
+- Die **Latenz eines LLMs** wird hauptsächlich durch folgende Faktoren beeinflusst:
+  - 🧠 **Model-Compute** → Rechenaufwand des Modells
+  - 📝 **Prompt- und Antwortlänge** → Umfang der Eingabe und generierten Ausgabe
+  - ☁️ **Provider-Kapazität** → Verfügbare Rechenressourcen des Anbieters
+
+- **User Experience**:
+  - Nutzer nehmen vor allem die **Wartezeit** wahr, nicht einzelne Millisekunden.
+  - Eine wichtige Kennzahl ist die **Time to First Token (TTFT)** → Zeit bis zur Ausgabe des ersten Tokens.
+
+### 🚀 Perceived Speed – Wahrgenommene Geschwindigkeit
+
+- 🌊 **Streaming**
+  - Erste Tokens werden bereits während der Generierung ausgegeben.
+  - Verbessert die **wahrgenommene Geschwindigkeit**, obwohl die Gesamtzeit gleich oder ähnlich bleibt.
+  - **Ideale Use Cases:** Chat-Anwendungen, AI Assistants und IDE-Hilfen.
+
+- 📦 **Batching**
+  - Mehrere unabhängige Requests werden in einem Call zusammengefasst.
+  - Ermöglicht einen **höheren Durchsatz** und reduziert den **Overhead**.
+  - **Ideale Use Cases:** Offline- und Bulk-Jobs wie Ticketverarbeitung, Log-Analysen und Reviews.
+
+### 🚦 Rate Limits & Retries
+
+- 🔐 **HTTP 401 – Authentication Error**
+  - Ursache: **Authentifizierungs- oder API-Key-Problem**.
+  - Lösung: **API-Key und Konfiguration überprüfen und korrigieren**.
+  - ⚠️ **Keine wiederholten Retries**, solange das Authentifizierungsproblem besteht.
+
+- ⚠️ **HTTP 429 – Rate Limit / Quota Exceeded**
+  - Ursache: **Rate Limit oder Quota** erreicht.
+  - Lösung: **Anfragefrequenz reduzieren** und eine geeignete Retry-Strategie implementieren.
+  - **Exponential Backoff** → Wartezeit zwischen Wiederholungsversuchen schrittweise erhöhen:
+    - `1s → 2s → 4s → 8s → …`
+  - Optional **Jitter** hinzufügen, um gleichzeitige Wiederholungsversuche zu vermeiden.
