@@ -98,3 +98,74 @@ Beim **Cleaning** werden extrahierte Inhalte bereinigt und für die weitere Vera
 
 - **Deduplizieren** → Doppelte Inhalte entfernen.
 - **OCR / Captioning** → Text und Informationen aus Grafiken ergänzen.
+
+# 📚 Document Ingestion and Chunking
+
+### 🧱 1. Ingestion-Pipeline (nach dem Cleaning)
+
+Nach der **Extraktion und dem Cleaning** durchläuft jedes Dokument eine **Ingestion-Pipeline** mit folgenden Schritten:
+
+1. 📥 **Dokument laden**
+2. 🧩 Dokument in **Chunks** aufteilen
+3. 🧠 Jeden Chunk **einbetten (Embedding)**
+4. 🗄️ **Embedding + Original-Text + Metadaten** in der **Vektordatenbank speichern**
+
+**🎯 Wichtig:** Chunking ist genau **Schritt 2** und entscheidet darüber, *welche Inhalte überhaupt eingebettet werden*.
+
+---
+
+### 🧩 2. Chunking-Strategie
+
+**Chunking** bedeutet nicht nur, einen Text nach einer festen Anzahl von Tokens aufzuteilen.
+
+Das Ziel ist die Bildung **sinnvoller, semantischer Einheiten**.
+
+Beispiele:
+
+- 📋 **Regel + Ausnahme** → Zusammengehörige Informationen bleiben erhalten.
+- 🔄 **Kompletter Prozessschritt** → Einzelne Schritte werden nicht auseinandergerissen.
+- 📝 **Zusammengehöriger Absatz** → Inhaltliche Zusammenhänge bleiben bestehen.
+
+**⚠️ Problem:** Schlechte Chunk-Grenzen, beispielsweise mitten in einem Satz, zerstören den Zusammenhang und verschlechtern die **Retrieval-Qualität**.
+
+---
+
+### ⚖️ 3. Chunk-Größe: Trade-off
+
+Die Wahl der **Chunk-Größe** beeinflusst sowohl die Präzision des Retrievals als auch den verfügbaren Kontext.
+
+#### 🔹 Kleine Chunks (1–2 Sätze, ~200 Tokens)
+
+- ✅ **Hohe Präzision** bei fokussierten Fragen.
+- ⚠️ **Risiko des Kontextverlusts**, beispielsweise wenn eine Ausnahme von der zugehörigen Regel getrennt wird.
+
+#### 🔸 Große Chunks (Abschnitt/Regelblock, ~800 Tokens)
+
+- ✅ **Mehr Kontext** und bessere Erhaltung inhaltlicher Zusammenhänge.
+- ⚠️ **Mehr Rauschen**, wodurch relevante Informationen weniger punktgenau gefunden werden.
+
+**🎯 Fazit:** Keine Chunk-Größe ist grundsätzlich besser. Die optimale Wahl hängt vom jeweiligen **Use Case** ab.
+
+---
+
+### 🎯 4. Einfluss auf Retrieval und Antworten
+
+#### ✅ Gute Chunking-Strategie
+
+- Relevante Informationen stehen **gemeinsam innerhalb eines Chunks**.
+- Das **LLM erhält genau den Kontext**, der für die Beantwortung benötigt wird.
+
+#### ❌ Schlechte Chunking-Strategie
+
+- Wichtige Informationen werden **voneinander getrennt** oder mit irrelevanten Inhalten vermischt.
+- Antworten können dadurch:
+  - **Unpräzise** werden.
+  - **Lückenhaft** sein.
+  - **Halluziniert wirken**.
+- Diese Probleme können **selbst bei guten Embeddings** auftreten.
+
+---
+
+### 💡 Kernaussage
+
+**Chunking ist ein entscheidender Qualitätshebel für RAG-Systeme und nicht nur ein technisches Detail.**
