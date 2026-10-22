@@ -169,3 +169,101 @@ Die Wahl der **Chunk-Größe** beeinflusst sowohl die Präzision des Retrievals 
 ### 💡 Kernaussage
 
 **Chunking ist ein entscheidender Qualitätshebel für RAG-Systeme und nicht nur ein technisches Detail.**
+
+
+# 🚀 Building a Simple RAG Pipeline
+
+### 🏗️ 1. Aufbau einer Mini-RAG-Pipeline
+
+Eine vollständige **Mini-RAG-Pipeline in Python** besteht aus drei zentralen Komponenten:
+
+- 📥 **Ingestion** → Dokumente laden, verarbeiten und für die Suche vorbereiten.
+- 🔍 **Retrieval** → Relevante Informationen aus dem Vector Store abrufen.
+- 🤖 **LLM** → Antworten auf Basis der abgerufenen Informationen generieren.
+
+---
+
+### 🔄 2. Dokumentzeit vs. Queryzeit
+
+Die **RAG-Pipeline** ist in zwei klar voneinander getrennte Prozesse unterteilt.
+
+#### 📚 Dokumentzeit (Ingestion Pipeline)
+
+Dokumente werden verarbeitet und für spätere Suchanfragen vorbereitet.
+
+**Documents → Embeddings → Vector Store**
+
+- 📄 **Documents** → Ausgangsdokumente bereitstellen.
+- 🧠 **Embeddings** → Dokumentinhalte in Vektoren umwandeln.
+- 🗄️ **Vector Store** → Embeddings für die spätere Suche speichern.
+
+#### 🔎 Queryzeit (Retrieval & Generation Pipeline)
+
+Eine Benutzeranfrage wird verarbeitet und mithilfe der gespeicherten Informationen beantwortet.
+
+**Query → Embedding → Retrieval → Prompt/LLM**
+
+- 💬 **Query** → Benutzeranfrage entgegennehmen.
+- 🧠 **Embedding** → Anfrage in einen Vektor umwandeln.
+- 🔍 **Retrieval** → Relevante Dokumente oder Chunks abrufen.
+- 🤖 **Prompt/LLM** → Kontext in den Prompt integrieren und eine Antwort generieren.
+
+---
+
+### ⚠️ 3. Typische Fehlerquellen
+
+#### 📄
+
+
+```python
+documents = [
+    "Die Authentifizierung erfolgt auf der Homepage direkt", 
+    "Nach der Authentifizierung wird die Validierung der Userdaten durchgefhrt", 
+    "Wenn Userdaten valide sind wird der user auf die richtigen raouts geleitet"
+    ]
+
+
+def embed(text):
+    text_lower = text.lower()
+    length = len(text)
+    word_count = len(text.split())
+    a_count = text_lower.count("a")
+    has_auth = 1 if "authentifizierung" in text_lower else 0
+    has_userdaten = 1 if "userdaten" in text_lower else 0
+    has_raouts = 1 if "raouts" in text_lower else 0
+    return [length, word_count, a_count, has_auth, has_userdaten, has_raouts]
+
+
+def distance(a, b):
+    diff_sum = 0
+    for i in range(len(a)):
+        diff_sum += (a[i] - b[i])**2
+    return diff_sum
+
+
+vectors = []
+for doc in documents:
+    vectors.append(embed(doc))
+
+
+query = "Wohin wird der User geleitet?"
+query_vec = embed(query)
+
+best_idx = 0
+best_dist = distance(query_vec, vectors[0])
+
+
+for i in range(1, len(vectors)):
+    current_dist = distance(query_vec, vectors[i])
+    if current_dist < best_dist:
+        best_idx = i
+
+
+def llm_answer(query, context):
+    return f"Frage: {query}\n\nKontext: {context}\n\nAntwort (simuliert auf Basis des Kontexts)."
+
+context = documents[best_idx]
+answer = llm_answer(query, context)
+
+print(answer)
+```
