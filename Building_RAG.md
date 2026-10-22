@@ -212,8 +212,25 @@ Eine Benutzeranfrage wird verarbeitet und mithilfe der gespeicherten Information
 
 ### ⚠️ 3. Typische Fehlerquellen
 
-#### 📄
+#### 📄 Fehlerhafte Dokumente
 
+- **Kaputte oder fehlerhaft verarbeitete Dokumente** können die Qualität des Retrievals beeinträchtigen.
+
+#### 📐 Embedding-/Dimension-Mismatch
+
+- **Unterschiedliche Embedding-Dimensionen** zwischen Modell und Vector Store können zu Fehlern bei der Speicherung oder Suche führen.
+
+#### 🧩 Fehlender Kontext im Prompt
+
+- Werden relevante Informationen nicht in den **Prompt** integriert, fehlt dem **LLM** die notwendige Grundlage für eine korrekte Antwort.
+
+---
+
+### 💡 Kernaussage
+
+Eine funktionierende **RAG-Pipeline** benötigt eine saubere Trennung zwischen **Dokumentenverarbeitung (Dokumentzeit)** und **Anfrageverarbeitung (Queryzeit)**.
+
+**Die Qualität der Dokumente, die Kompatibilität der Embeddings und die korrekte Kontextbereitstellung sind entscheidend für zuverlässige RAG-Antworten.**
 
 ```python
 documents = [
