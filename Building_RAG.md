@@ -284,3 +284,110 @@ answer = llm_answer(query, context)
 
 print(answer)
 ```
+
+# 🔍 Metadata Filtering in RAG Systems
+
+### 🏷️ 1. Chunk-Metadaten
+
+Jeder **Chunk** besitzt neben **Text und Embedding** zusätzliche strukturierte Metadaten, die wichtige Informationen über den jeweiligen Inhalt bereitstellen.
+
+**Typische Metadatenfelder:**
+
+- 🔢 `product_version` → Produkt- oder Softwareversion
+- 🏢 `department` → Zuständige Abteilung
+- 📂 `source` → Herkunft der Informationen
+- 📅 `valid_from / valid_to` → Gültigkeitszeitraum
+- ⚙️ `environment` → Systemumgebung
+- 🔧 `service_name` → Zugehöriger Service
+
+Diese Felder modellieren die **„formale Wahrheit“** eines Dokuments:
+
+- **Welche Version?**
+- **Welches Team?**
+- **Welche Quelle?**
+- **Wann gültig?**
+
+---
+
+### ⚙️ 2. Metadata Filtering
+
+Beim **Metadata Filtering** wird der Suchraum vor oder während der **Vektorsuche** anhand strukturierter Kriterien eingeschränkt.
+
+**Beispiele für Metadatenfilter:**
+
+```python
+product_version = "3.2"
+department = "HR"
+country = "DE"
+source IN ("confluence", "github")
+```
+
+**🎯 Ziel:**
+
+- Logisch unpassende Chunks frühzeitig ausschließen.
+- Dokumente mit der **falschen Version**, dem **falschen Land** oder der **falschen Quelle** herausfiltern.
+- Die Suche auf **formal relevante Informationen** begrenzen.
+
+---
+
+### 🧠 3. Warum Metadaten und Semantik kombinieren?
+
+#### 🔍 Nur semantische Suche
+
+- ✅ Findet **inhaltlich und semantisch ähnliche Informationen**.
+- ⚠️ Kann jedoch Dokumente aus der **falschen Version**, dem **falschen Department** oder der **falschen Quelle** zurückliefern.
+
+#### 🏷️ Nur Metadata Filtering
+
+- ✅ Alle gefundenen Dokumente erfüllen die **formalen Filterkriterien**.
+- ⚠️ Es bleibt unklar, welcher Chunk **semantisch am besten zur Suchanfrage passt**.
+
+#### ✅ Kombination aus Metadaten und Semantik
+
+Beide Verfahren ergänzen sich:
+
+- 🏷️ **Metadata Filtering** → Definiert, *welche Chunks überhaupt berücksichtigt werden dürfen*.
+- 🧠 **Semantic Search** → Ermittelt, *welche dieser Chunks am besten zur Frage passen*.
+
+**🎯 Ergebnis:** Formal passende und gleichzeitig semantisch relevante Suchergebnisse.
+
+---
+
+### 🏢 4. Typische Enterprise-Szenarien
+
+#### 📅 Date-Scoped Policies
+
+- Suche nach **aktuell gültigen HR- oder Legal-Regelungen**.
+- Einschränkung anhand des Gültigkeitszeitraums:
+  - `valid_from`
+  - `valid_to`
+
+#### 🏢 Department- oder Service-spezifisches Wissen
+
+- Unterscheidung zwischen verschiedenen Abteilungen:
+  - `department = "Security"`
+  - `department = "HR"`
+
+- Einschränkung auf bestimmte Services und Umgebungen:
+  - `service_name = "billing"`
+  - `environment = "prod"`
+
+#### 📚 Multi-Source-Knowledge
+
+- Gezielte Auswahl von Informationen anhand ihrer Herkunft.
+
+**Beispiele:**
+
+- 💻 `source = "github"` → Technische Deployments
+- 📁 `source = "sharepoint"` → Eher nicht für genaue Runbooks
+
+---
+
+### 💡 Kernaussage
+
+**Metadata Filtering und semantische Suche ergänzen sich innerhalb einer RAG-Pipeline.**
+
+- **Metadaten** stellen sicher, dass nur formal passende Dokumente berücksichtigt werden.
+- **Semantische Suche** identifiziert die inhaltlich relevantesten Chunks innerhalb dieses Suchraums.
+
+**➡️ Metadata Filtering bestimmt, welche Dokumente infrage kommen – Semantic Search entscheidet, welche davon am besten zur Anfrage passen.**
