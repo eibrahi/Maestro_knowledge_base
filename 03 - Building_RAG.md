@@ -391,3 +391,87 @@ Beide Verfahren ergänzen sich:
 - **Semantische Suche** identifiziert die inhaltlich relevantesten Chunks innerhalb dieses Suchraums.
 
 **➡️ Metadata Filtering bestimmt, welche Dokumente infrage kommen – Semantic Search entscheidet, welche davon am besten zur Anfrage passen.**
+
+# 🧠 Context Management in RAG Pipelines
+
+### 🎯 1. Priorisierung relevanter Dokumente
+
+Die **Priorisierung** stellt sicher, dass nur die wichtigsten und relevantesten Informationen an das **LLM** übergeben werden.
+
+- ✅ **Relevante Dokumente auswählen**
+  - Die Dokumente mit der höchsten Relevanz für die Benutzeranfrage priorisieren.
+
+- 🗑️ **Unwichtige oder konfliktäre Informationen entfernen**
+  - Irrelevante Inhalte aussortieren.
+  - Widersprüchliche Informationen erkennen und gegebenenfalls ausschließen.
+
+- 💰 **Truncation und Kosten vermeiden**
+  - Verhindern, dass wichtige Informationen aufgrund begrenzter **Kontextfenster (Context Windows)** abgeschnitten werden.
+  - Den **Tokenverbrauch** und damit die Kosten reduzieren.
+
+---
+
+### 📝 2. Summarisierung (Summarization)
+
+Die **Summarisierung** ist besonders sinnvoll, wenn relevante Informationen über viele kleine und unterschiedliche Quellen verteilt sind.
+
+**Typische Datenquellen:**
+
+- 💬 **Slack** → Nachrichten und Diskussionen
+- 🎫 **Tickets** → Support- und Incident-Tickets
+- 📋 **Logs** → Systemereignisse und Fehlermeldungen
+
+**🎯 Ziel:**
+
+- Verteilte Informationen zu einer **kompakten Zusammenfassung** verdichten.
+- Redundante Inhalte reduzieren.
+- Statt alle Rohdaten an das LLM zu übergeben, nur die **wesentlichen Informationen** bereitstellen.
+
+---
+
+### 🔄 3. Sliding Window
+
+Die **Sliding-Window-Technik** eignet sich besonders für die Verarbeitung **sehr langer Einzelquellen**.
+
+**Typische Use Cases:**
+
+- 📖 **Runbooks** → Umfangreiche technische Dokumentationen
+- 📋 **Logs** → Lange Protokolle und Ereignisverläufe
+
+**Funktionsweise:**
+
+- Lange Inhalte werden in **aufeinanderfolgende, teilweise überlappende Abschnitte** unterteilt.
+- Das **Sliding Window** bewegt sich schrittweise durch die Daten.
+- Dadurch bleiben **wichtige Details und der lokale Kontext** erhalten.
+
+**🎯 Ziel:** Große Informationsmengen verarbeiten, ohne relevante Zusammenhänge zwischen benachbarten Abschnitten zu verlieren.
+
+---
+
+### ⚠️ 4. Risiken durch zu viel Kontext
+
+**Mehr Kontext bedeutet nicht automatisch bessere Antworten.**
+
+Zu große oder schlecht zusammengestellte Kontextmengen können die **Antwortqualität eines LLMs verschlechtern**.
+
+#### ✂️ Truncation (Abschneiden von Informationen)
+
+- Wird das **Kontextfenster überschritten**, können wichtige Informationen abgeschnitten werden.
+- Dadurch fehlen dem LLM relevante Fakten für die Antwortgenerierung.
+
+#### 🌫️ Information Noise (Informationsrauschen)
+
+- Zu viele irrelevante Informationen können die **wichtigen Inhalte überdecken**.
+- Das LLM kann dadurch Schwierigkeiten haben, die entscheidenden Informationen zu identifizieren.
+
+---
+
+### 💡 Kernaussage
+
+**Effektives Context Management ist entscheidend für die Qualität, Performance und Kosteneffizienz einer RAG-Pipeline.**
+
+- 🎯 **Priorisierung** → Die relevantesten Informationen auswählen.
+- 📝 **Summarisierung** → Verteilte Informationen kompakt zusammenfassen.
+- 🔄 **Sliding Window** → Lange Quellen unter Erhaltung des lokalen Kontexts verarbeiten.
+
+**➡️ Nicht die Menge des Kontexts entscheidet über die Antwortqualität, sondern dessen Relevanz, Struktur und gezielte Auswahl.**
