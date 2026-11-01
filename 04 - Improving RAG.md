@@ -267,3 +267,77 @@ Die Sicherheitsmaßnahmen betreffen den gesamten **RAG-Lifecycle**.
 - 🔎 **Post-Retrieval Checks** → Zusätzliche Sicherheitsprüfung.
 
 **➡️ Security-by-Design: Ingestion → Metadaten | Storage → Struktur | Retrieval → Filter | Response → Checks.**
+
+# 🎯 When RAG Isn't the Answer
+
+### 📚 1. Long Context
+
+**Long Context** eignet sich, wenn das benötigte Wissen **klein, stabil und vollständig im Kontextfenster platzierbar** ist.
+
+- ✅ **Einsatzkriterien**
+  - **Kleine Wissensbasis** → Überschaubare Informationsmenge.
+  - **Stabile Informationen** → Inhalte ändern sich selten.
+  - **Begrenzter Kontext** → Alle relevanten Informationen passen in das Kontextfenster des LLMs.
+
+- 📋 **Typische Use Cases**
+  - Kleine FAQs
+  - Mini-Dokumentationen
+  - Feste Regeln
+
+---
+
+### 🔍 2. RAG (Retrieval-Augmented Generation)
+
+**RAG** eignet sich, wenn das benötigte Wissen **umfangreich ist oder häufig aktualisiert wird** und gezielt nachgeschlagen werden muss.
+
+- ✅ **Einsatzkriterien**
+  - **Große Wissensbasis** → Umfangreiche Dokumentensammlungen.
+  - **Dynamische Informationen** → Inhalte ändern sich regelmäßig.
+  - **Gezieltes Retrieval** → Relevante Informationen werden bei Bedarf abgerufen.
+
+- 📋 **Typische Use Cases**
+  - Runbooks
+  - Policies
+  - Produktkataloge
+  - Dynamische Regeln
+
+---
+
+### 🧠 3. Fine-Tuning
+
+**Fine-Tuning** eignet sich, wenn das **Verhalten, die Mustererkennung oder der Stil eines Modells** angepasst werden sollen.
+
+Der Fokus liegt dabei **nicht auf ständig wechselnden Fakten**, sondern auf dem gewünschten Modellverhalten.
+
+- ✅ **Einsatzkriterien**
+  - **Verhalten (Behavior)** → Anpassung des Antwortverhaltens.
+  - **Patterns** → Erlernen spezifischer Muster.
+  - **Stil (Style)** → Anpassung der Ausdrucksweise.
+  - **Latenz-Anforderungen** → Einsatz bei strengen Anforderungen an die Antwortgeschwindigkeit.
+
+- 📋 **Typische Use Cases**
+  - Tonalität
+  - Code-Stil
+  - Klassifikationsregeln mit harter Latenz-Anforderung
+
+---
+
+### ⚖️ 4. Vergleich der Ansätze
+
+| Ansatz | Einsatzkriterien | Typische Use Cases |
+|---|---|---|
+| 📚 **Long Context** | Kleines, stabiles Wissen, das in das Kontextfenster passt | FAQs, Mini-Dokus, feste Regeln |
+| 🔍 **RAG** | Große oder häufig aktualisierte Wissensbasis | Runbooks, Policies, Produktkataloge, dynamische Regeln |
+| 🧠 **Fine-Tuning** | Anpassung von Verhalten, Patterns und Stil | Tonalität, Code-Stil, Klassifikationsregeln |
+
+---
+
+### 💡 Kernaussage
+
+Die Wahl zwischen **Long Context, RAG und Fine-Tuning** hängt von der Art des Wissens und den Anforderungen an das LLM-System ab.
+
+- 📚 **Long Context** → Kleines, stabiles Wissen direkt bereitstellen.
+- 🔍 **RAG** → Große oder dynamische Wissensbestände gezielt durchsuchen.
+- 🧠 **Fine-Tuning** → Modellverhalten, Muster und Stil anpassen.
+
+**➡️ Nicht jedes Wissensproblem benötigt RAG. Entscheidend ist die passende Architektur für den jeweiligen Use Case.**
