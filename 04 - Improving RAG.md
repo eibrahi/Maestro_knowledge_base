@@ -192,3 +192,78 @@ Die verschiedenen **Advanced RAG Techniques** adressieren unterschiedliche Retri
 - 🔎 **Hybrid Search** → Kombiniert **exakte Keywords** mit **semantischer Bedeutung**.
 
 **➡️ Simple RAG first, keep it simple. ✅**
+
+# 🔐 Security and Access Control in RAG
+
+### ⚠️ 1. Kernrisiko in RAG-Systemen
+
+Ein zentrales Sicherheitsrisiko in **RAG-Systemen** besteht darin, dass der **Retriever** hochrelevante, aber **nicht autorisierte Dokumente** zurückliefern kann.
+
+- 🔍 **Retriever**
+  - Kann Dokumente anhand ihrer semantischen Relevanz finden, ohne automatisch die Zugriffsberechtigungen zu berücksichtigen.
+
+- 🚨 **Unberechtigter Datenzugriff**
+  - Das **LLM** erhält möglicherweise Zugriff auf vertrauliche oder private Informationen.
+  - **Beispiel:** Gehaltsinformationen anderer Mitarbeiter.
+
+---
+
+### 🛡️ 2. Drei Schutzansätze
+
+#### 👤 Per-User Vector Stores
+
+- Jeder Benutzer erhält einen eigenen **Vector Store**.
+- ✅ **Vorteil:** Einfache Trennung der Daten und Zugriffsbereiche.
+- ⚠️ **Nachteil:** Schwer skalierbar bei einer großen Anzahl von Benutzern.
+
+#### 🏷️ Metadata Filtering
+
+- Verwendung eines **globalen Vector Stores** mit strukturierten Zugriffsfiltern.
+- Die Zugriffsbeschränkung erfolgt anhand von **Metadaten**.
+
+**Beispiele für Filterkriterien:**
+
+- `employee_id` → Zugriff anhand der Mitarbeiter-ID.
+- `roles` → Zugriff anhand definierter Benutzerrollen.
+
+#### 🔎 Post-Retrieval Checks
+
+- Zusätzliche **Berechtigungsprüfung** nach dem Retrieval.
+- Dient als **zweite Sicherheitsschicht**.
+- ⚠️ **Wichtig:** Post-Retrieval Checks ersetzen keine saubere Zugriffskontrolle während des Retrievals.
+
+---
+
+### 🏗️ 3. Security-by-Design
+
+**Security muss von Anfang an Bestandteil der RAG-Architektur sein** und darf nicht erst nachträglich integriert werden.
+
+Die Sicherheitsmaßnahmen betreffen den gesamten **RAG-Lifecycle**.
+
+#### 📥 Ingestion – Metadaten
+
+- Relevante **Zugriffs- und Sicherheitsmetadaten** bereits bei der Datenaufnahme berücksichtigen.
+
+#### 🗄️ Storage – Struktur
+
+- Daten und Dokumente innerhalb des **Vector Stores** strukturiert und entsprechend den Zugriffsanforderungen organisieren.
+
+#### 🔍 Retrieval – Filter
+
+- **Metadata Filtering** einsetzen, um nicht autorisierte Dokumente bereits bei der Suche auszuschließen.
+
+#### 🤖 Response – Checks
+
+- Zusätzliche **Sicherheitsprüfungen** vor der Ausgabe der generierten Antwort durchführen.
+
+---
+
+### 💡 Kernaussage
+
+**Security and Access Control müssen über den gesamten RAG-Lifecycle hinweg berücksichtigt werden.**
+
+- 👤 **Per-User Vector Stores** → Trennung der Daten nach Benutzern.
+- 🏷️ **Metadata Filtering** → Zugriffskontrolle über Metadaten und Rollen.
+- 🔎 **Post-Retrieval Checks** → Zusätzliche Sicherheitsprüfung.
+
+**➡️ Security-by-Design: Ingestion → Metadaten | Storage → Struktur | Retrieval → Filter | Response → Checks.**
