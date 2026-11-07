@@ -71,3 +71,46 @@
 
 - 🔢 **Deterministic** → Ist der Output exakt richtig formatiert oder entspricht er der erwarteten Antwort?
 - 🎲 **Probabilistic** → Ist der Output inhaltlich sinnvoll, korrekt und relevant?
+
+### 🤖 LLM-as-a-Judge
+
+- **LLM-as-a-Judge** bezeichnet den Ansatz, ein LLM als automatisierten Bewerter einzusetzen, um die Antworten eines anderen LLMs anhand definierter Kriterien zu bewerten.
+- Beispiel: Ein LLM bewertet die Qualität von automatisch generierten **Incident-Erklärungen**.
+
+### ✅ Suitable Use Cases – Wofür ist es geeignet?
+
+LLM-as-a-Judge eignet sich besonders für **subjektive Qualitätsmerkmale**, die sich nur schwer mit festen Regeln messen lassen:
+
+- 📝 **Clarity** → Ist die Antwort verständlich und klar formuliert?
+- 📚 **Structure** → Ist die Antwort logisch und übersichtlich aufgebaut?
+- 📖 **Runbook Alignment** → Entspricht die Antwort den Vorgaben und Prozessen des Runbooks?
+- 💬 **Tone** → Ist der Kommunikationsstil angemessen?
+- ⚠️ **Risk Awareness** → Werden potenzielle Risiken und Warnhinweise berücksichtigt?
+
+### ❌ Limitations – Wofür ist es weniger geeignet?
+
+- 🔍 **Hard Facts** → Exakte Fakten wie Fehlercodes, IDs oder technische Werte überprüfen.
+- 📋 **Schema Validation** → Strikte Einhaltung technischer Datenstrukturen und Formate prüfen.
+- 🎯 **Factual Accuracy** → Die tatsächliche Wahrheit einer Aussage zuverlässig verifizieren.
+- 🔄 **Cross-Call Consistency** → Konsistenz über viele unabhängige Modellaufrufe hinweg sicherstellen.
+
+Für solche Anforderungen sind **deterministische Prüfungen** oder externe Datenquellen zuverlässiger.
+
+### 📊 Evaluation Rubric – Strukturierte Bewertung
+
+- **Wichtig:** Ein LLM-Judge sollte niemals nur allgemein gefragt werden: *„Is this answer good?“*
+- Stattdessen sollte eine **klare Bewertungsrubrik (Rubric)** mit definierten Kriterien und strukturierten Scores verwendet werden.
+
+**Beispiel für Bewertungskriterien:**
+
+- 🎯 **Relevance** → Beantwortet die Antwort die eigentliche Frage?
+- 📖 **Alignment** → Entspricht sie den Vorgaben des Runbooks?
+- 🛠️ **Actionability** → Enthält sie konkrete und umsetzbare Handlungsempfehlungen?
+- ⚠️ **Risk Awareness** → Werden Risiken und mögliche Auswirkungen berücksichtigt?
+
+### 🎯 Key Takeaway
+
+**LLM-as-a-Judge** ermöglicht die automatisierte Bewertung subjektiver Qualitätsmerkmale, ersetzt aber keine deterministischen Prüfungen für harte Fakten und technische Anforderungen.
+
+- 🤖 **LLM Judge** → Bewertet Qualität, Verständlichkeit und Kontext.
+- 🔢 **Deterministic Checks** → Überprüfen Fakten, Formate und technische Regeln.
