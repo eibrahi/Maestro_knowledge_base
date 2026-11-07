@@ -116,3 +116,56 @@ Für solche Anforderungen sind **deterministische Prüfungen** oder externe Date
 
 - 🤖 **LLM Judge** → Bewertet Qualität, Verständlichkeit und Kontext.
 - 🔢 **Deterministic Checks** → Überprüfen Fakten, Formate und technische Regeln.
+
+# 👤 Human-in-the-Loop (HITL)
+
+### 🧑‍⚖️ When is Human-in-the-Loop Needed?
+
+- **Human-in-the-Loop (HITL)** bedeutet, dass Menschen in den Evaluationsprozess eingebunden werden, um LLM-Ausgaben zu überprüfen und zu bewerten.
+- HITL wird benötigt, wenn **automatisches Scoring oder LLM-as-a-Judge allein nicht ausreichen**, um eine zuverlässige Bewertung sicherzustellen.
+
+**Typische Einsatzgebiete:**
+
+- 🚨 **High Stakes** → Kritische Anwendungsbereiche wie Medizin, Finanzen, Recht, Security oder Mental Health mit hohen Risiken bei Fehlentscheidungen.
+- 🔍 **Edge Cases** → Neue oder ungewöhnliche Situationen, die durch bestehende Testfälle nicht ausreichend abgedeckt sind.
+- 💬 **Subjective Quality** → Bewertung von Ton, Empathie, Angemessenheit und der Frage, ob eine Antwort für Menschen tatsächlich hilfreich ist.
+
+### 🎯 Smart Sampling – Gezielte Stichproben
+
+- **Smart Sampling** bedeutet, nicht 100 % aller LLM-Antworten manuell zu überprüfen, sondern die Überprüfung gezielt nach Risiko und Relevanz zu steuern.
+
+**Vorgehensweise:**
+
+- 📊 **Risk Classification** → Einteilung der Fälle in Risikoklassen, z. B. anhand von `sev-level`, Kundentyp oder Use Case.
+- 🚨 **High-Risk Cases** → Alle Fälle mit hohem Risiko werden manuell überprüft.
+- 🎲 **Representative Sampling** → Aus Low- und Medium-Risk-Fällen wird eine repräsentative Stichprobe gezogen (z. B. 5–10 %).
+- ⚠️ **Trigger-Based Review** → Bestimmte Schlüsselereignisse lösen automatisch eine manuelle Überprüfung aus, z. B. „Datenverlust“, „Security Incident“ oder „Compliance-Verstoß“.
+
+**Ziel:** Hohe Sicherheit und Qualität bei gleichzeitig vertretbarem manuellem Aufwand.
+
+### 📋 Reviewer Guidelines – Einheitliche Bewertung
+
+- **Reviewer Guidelines** sind klare Vorgaben und Checklisten, die sicherstellen, dass verschiedene Reviewer LLM-Ausgaben nach denselben Kriterien bewerten.
+- Beispiel: Evaluation eines **Incident-RAG-Systems** anhand von drei zentralen Kriterien:
+
+**1. 🔐 Access & Privacy**
+- Dürfen die angezeigten Informationen diesem Benutzer oder System überhaupt zugänglich gemacht werden?
+- Werden Datenschutz- und Berechtigungsregeln eingehalten?
+
+**2. 🚨 Correct Routing**
+- Werden Security-, Compliance- oder High-Severity-Incidents korrekt eskaliert?
+- Werden die richtigen Ansprechpartner eingebunden (z. B. Incident Commander, Security-Team oder On-Call)?
+
+**3. 🔍 Facts & Hallucinations**
+- Sind Root-Cause-Behauptungen durch die verfügbaren Kontextdaten belegt?
+- Werden keine unbelegten Ursachen, Fakten oder Maßnahmen erfunden?
+
+### 🎯 Key Takeaway
+
+**Human-in-the-Loop ergänzt automatisierte Evaluation durch menschliches Urteilsvermögen und Risikobewertung.**
+
+- 🤖 **Automated Evaluation** → Schnelle und skalierbare Überprüfung vieler Antworten.
+- 👤 **Human Review** → Detaillierte Bewertung kritischer, ungewöhnlicher oder subjektiver Fälle.
+- 📊 **Smart Sampling** → Gezielte Überprüfung statt manueller Kontrolle aller Antworten.
+
+**Ergebnis:** Konsistentere Bewertungen, frühzeitige Erkennung von Risiken und eine kontinuierliche Verbesserung des LLM-Systems.
