@@ -72,7 +72,9 @@
 - 🔢 **Deterministic** → Ist der Output exakt richtig formatiert oder entspricht er der erwarteten Antwort?
 - 🎲 **Probabilistic** → Ist der Output inhaltlich sinnvoll, korrekt und relevant?
 
-### 🤖 LLM-as-a-Judge
+# 🤖 LLM-as-a-Judge
+
+### LLM-as-a-Judge
 
 - **LLM-as-a-Judge** bezeichnet den Ansatz, ein LLM als automatisierten Bewerter einzusetzen, um die Antworten eines anderen LLMs anhand definierter Kriterien zu bewerten.
 - Beispiel: Ein LLM bewertet die Qualität von automatisch generierten **Incident-Erklärungen**.
