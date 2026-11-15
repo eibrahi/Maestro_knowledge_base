@@ -169,3 +169,49 @@ Für solche Anforderungen sind **deterministische Prüfungen** oder externe Date
 - 📊 **Smart Sampling** → Gezielte Überprüfung statt manueller Kontrolle aller Antworten.
 
 **Ergebnis:** Konsistentere Bewertungen, frühzeitige Erkennung von Risiken und eine kontinuierliche Verbesserung des LLM-Systems.
+
+# 🔍 Measuring Hallucination and Faithfulness
+
+### 🎯 Faithfulness – Kontexttreue
+
+- **Faithfulness** beschreibt, wie gut sich die Aussagen einer LLM-Antwort durch den bereitgestellten Kontext belegen lassen.
+- Jede einzelne Aussage (**Claim**) muss durch die verfügbaren Kontextinformationen gestützt sein.
+- Eine Antwort kann sprachlich überzeugend und plausibel sein, aber trotzdem eine geringe **Faithfulness** aufweisen, wenn sie unbelegte Informationen enthält.
+
+### 🚨 Hallucination Detection – Halluzinationen erkennen und messen
+
+- **Hallucination Detection** überprüft systematisch, ob ein LLM Aussagen generiert, die nicht durch den vorhandenen Kontext gedeckt sind.
+
+**Vorgehensweise:**
+
+1. 📝 **Claim Extraction** → Die generierte Antwort wird in einzelne überprüfbare Aussagen (Claims) zerlegt.
+2. 🔍 **Claim Verification** → Jeder Claim wird mit dem bereitgestellten Kontext abgeglichen:
+   - ✅ **Supported** → Die Aussage wird durch den Kontext belegt.
+   - ⚠️ **Unsupported** → Die Aussage wird durch den Kontext nicht belegt.
+   - ❌ **Contradicted** → Die Aussage widerspricht den verfügbaren Kontextinformationen.
+3. 📊 **Ground Truth Comparison (optional)** → Die Claims werden zusätzlich mit einer verifizierten Referenzantwort oder gelabelten Aussagen verglichen.
+
+### 📚 Ground-Truth Datasets – Referenzdatensätze
+
+- **Ground-Truth-Datasets** enthalten fachlich geprüfte Referenzdaten und dienen als Grundlage für eine systematische Evaluation von LLM-Systemen.
+
+**Aufbau eines domänenspezifischen Datasets (z. B. Incident-RAG):**
+
+- ❓ **Question** → Ursprüngliche Benutzerfrage.
+- 📄 **Context** → Bereitgestellte Kontextinformationen (z. B. Incident-Dokumentation oder Runbooks).
+- 🎯 **Reference Answer** → Fachlich geprüfte Referenzantwort.
+- 🏷️ **Labels** → Kennzeichnung einzelner Aussagen, z. B. Supported, Unsupported oder Contradicted.
+
+**Nutzen von Ground-Truth-Datasets:**
+
+- 📈 **Pattern Detection** → Wiederkehrende Fehler und Halluzinationsmuster erkennen, z. B. zu viele unbelegte Root-Cause-Behauptungen.
+- 🔧 **Targeted Improvements** → Gezielte Verbesserungen an Prompts, Instruktionen und RAG-Konfigurationen vornehmen.
+- 🔄 **Regression Testing** → Überprüfen, ob Änderungen am System die Antwortqualität verbessern oder verschlechtern.
+
+### 🎯 Key Takeaway
+
+**Faithfulness misst die Kontexttreue einer Antwort, während Hallucination Detection unbelegte oder widersprüchliche Aussagen identifiziert.**
+
+- 🔍 **Faithfulness** → Sind alle Aussagen durch den Kontext belegt?
+- 🚨 **Hallucination Detection** → Welche Aussagen sind unbelegt oder widersprüchlich?
+- 📚 **Ground Truth** → Wie lässt sich die tatsächliche Qualität anhand geprüfter Referenzdaten bewerten?
