@@ -88,3 +88,34 @@
 - 🔄 **Fixed Test Set** → Vergleichbare Testergebnisse über verschiedene Versionen hinweg.
 - ⚠️ **Regression Detection** → Verschlechterungen in einzelnen Qualitätsmetriken erkennen.
 - 🛡️ **Eval as Deployment Gate** → Evaluation als verbindliche Qualitätskontrolle vor dem Deployment.
+
+# ⚖️ A/B Testing LLM Outputs
+
+### 🧪 What is A/B Testing?
+
+- **A/B-Testing für LLMs** vergleicht zwei unterschiedliche Versionen eines LLM-Systems (z. B. Prompt, Modell oder Config), um herauszufinden, welche Version bessere Ergebnisse liefert.
+- Beide Versionen erhalten **dieselben Inputs** und werden mit **derselben Scoring-Methode** bewertet.
+- Vor dem Test wird ein klares **Decision Criterion** definiert, anhand dessen entschieden wird, wann Version B gegenüber Version A gewinnt.
+
+### 🔄 A/B Testing vs. Regression Testing
+
+- ⚖️ **A/B Testing** → Vergleicht zwei Versionen miteinander, um festzustellen, welche besser performt.
+- 🔍 **Regression Testing** → Prüft, ob Änderungen bestehende Funktionen oder Qualitätsmetriken unbeabsichtigt verschlechtern.
+
+**Unterschied:**
+- A/B-Testing beantwortet: *Welche Version ist besser?*
+- Regression Testing beantwortet: *Hat eine Änderung bestehende Qualität verschlechtert?*
+
+### 📋 Requirements – Pflicht-Bausteine eines A/B-Tests
+
+- 📚 **Shared Test Set** → Beide Versionen werden mit exakt denselben Testfällen und Inputs getestet.
+- 📊 **Consistent Scoring** → Beide Versionen werden anhand derselben Metriken und Bewertungskriterien beurteilt.
+- 🎯 **Decision Criterion** → Vorab definieren, anhand welcher Kriterien eine Version gewinnt (z. B. höhere Faithfulness bei gleichbleibender JSON-Validität).
+
+### 🎯 Key Takeaway
+
+**A/B-Testing ermöglicht einen fairen und systematischen Vergleich verschiedener LLM-Versionen.**
+
+- 🅰️ **Version A** → Bestehender Prompt, Modell oder Config.
+- 🅱️ **Version B** → Neue Variante, die getestet wird.
+- ⚖️ **Fair Comparison** → Gleiche Inputs, gleiche Scoring-Methode und klare Entscheidungskriterien.
