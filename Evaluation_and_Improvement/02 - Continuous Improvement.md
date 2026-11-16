@@ -43,3 +43,48 @@
 - 🧪 **Eval Functions** → Wie wird getestet?
 - 📊 **Scoring & Reporting** → Wie werden Ergebnisse bewertet und dargestellt?
 - 🔄 **Continuous Improvement** → Wie werden Fehler zur Verbesserung genutzt?
+
+# 🔄 Regression Testing for Prompts
+
+### 🧪 When to Run the Eval Suite?
+
+- Die **Eval-Suite** sollte nach jeder relevanten Änderung am LLM-System ausgeführt werden, um sicherzustellen, dass bestehende Funktionen weiterhin korrekt arbeiten.
+- Getestet wird immer mit demselben **Fixed Test Set**, damit Ergebnisse vergleichbar und Veränderungen messbar bleiben.
+
+**Typische Auslöser:**
+
+- 📝 **Prompt Changes** → Änderungen an System- oder User-Prompts.
+- 🤖 **Model Changes** → Wechsel oder Update der verwendeten Modellversion.
+- ⚙️ **Configuration Changes** → Anpassungen wichtiger LLM-Parameter oder Systemkonfigurationen.
+
+### ⚠️ What is a Regression?
+
+- Eine **Regression** liegt vor, wenn eine Änderung am LLM-System eine bestehende Funktion oder Qualitätsmetrik unbeabsichtigt verschlechtert.
+- Eine Verbesserung in einem Bereich kann gleichzeitig eine Verschlechterung in einem anderen Bereich verursachen.
+
+**Beispiel:**
+
+- 📝 **Summary Quality** → Eine Prompt-Anpassung verbessert die Qualität der generierten Zusammenfassungen.
+- 📋 **JSON Validity** → Gleichzeitig liefert das Modell häufiger ungültiges JSON.
+
+**Ergebnis:** Eine isolierte Verbesserung bedeutet nicht automatisch, dass sich die Gesamtqualität des Systems verbessert hat.
+
+### 🛡️ Prompt as Code – Prompts wie Code behandeln
+
+- **Prompts sind ein Bestandteil der Softwarelogik** und sollten genauso systematisch versioniert, getestet und überprüft werden wie klassischer Programmcode.
+- Änderungen an Prompts dürfen nicht ungeprüft in die Produktion übernommen werden.
+
+**Best Practices:**
+
+- 📚 **Version Control** → Prompts versionieren und Änderungen nachvollziehbar dokumentieren.
+- 🧪 **Automated Eval Suite** → Nach relevanten Änderungen automatisch alle definierten Tests ausführen.
+- 🚦 **Quality Gates** → Kritische Qualitätsmetriken müssen definierte Mindestanforderungen erfüllen.
+- 🚀 **Deployment Gate** → Kein Deployment, solange wichtige Evaluationsmetriken die definierten Grenzwerte nicht erfüllen.
+
+### 🎯 Key Takeaway
+
+**Regression Testing stellt sicher, dass Änderungen an Prompts, Modellen oder Konfigurationen bestehende Qualitätsmerkmale nicht unbeabsichtigt verschlechtern.**
+
+- 🔄 **Fixed Test Set** → Vergleichbare Testergebnisse über verschiedene Versionen hinweg.
+- ⚠️ **Regression Detection** → Verschlechterungen in einzelnen Qualitätsmetriken erkennen.
+- 🛡️ **Eval as Deployment Gate** → Evaluation als verbindliche Qualitätskontrolle vor dem Deployment.
