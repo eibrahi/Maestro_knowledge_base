@@ -61,3 +61,41 @@
 **Chatbots generate answers. AI Agents use reasoning and tools to accomplish goals.**
 
 Der Agent arbeitet nicht nur mit Sprache, sondern kann aktiv mit seiner Umgebung und externen Systemen interagieren.
+
+# 🔧 Introduction to Function Calling
+
+### 🤖 What is Function Calling?
+
+- **Function Calling** ermöglicht einem LLM, externe Funktionen und Tools gezielt anzufordern, um Aufgaben auszuführen, die über die reine Textgenerierung hinausgehen.
+- Das Modell führt die Funktion dabei **nicht selbst aus**, sondern entscheidet, wann und mit welchen Parametern eine Funktion aufgerufen werden soll.
+- Die eigentliche Ausführung übernimmt die Anwendung (z. B. Python).
+
+### 🔄 How Function Calling Works
+
+**Der typische Ablauf besteht aus vier Schritten:**
+
+1. 🧠 **Model Requests Action** → Das LLM erkennt, dass eine externe Funktion benötigt wird, und fordert deren Ausführung mit den passenden Parametern an.
+2. ⚙️ **Application Executes Function** → Die Python-Anwendung empfängt den Funktionsaufruf und führt die entsprechende Funktion aus.
+3. 📤 **Tool Result** → Das Ergebnis der Funktion wird zurück an das LLM übergeben.
+4. 🤖 **Model Generates Response** → Das LLM verarbeitet das Ergebnis und erstellt eine Antwort oder entscheidet über den nächsten Tool-Aufruf.
+
+### 🛠️ Function Calling in AI Agents
+
+- **Function Calling ist eine zentrale Grundlage für Tool-Nutzung in AI Agents.**
+- Dadurch können LLMs mit externen Systemen interagieren und konkrete Aktionen auslösen.
+
+**Beispiele:**
+
+- 🔍 **Search** → Informationen über eine API abrufen.
+- 🗄️ **Database Query** → Daten aus einer Datenbank lesen.
+- 🎫 **Ticket Creation** → Ein Incident-Ticket erstellen.
+- 📊 **Data Retrieval** → Aktuelle System- oder Monitoring-Daten abrufen.
+
+### 🎯 Key Takeaway
+
+**Function Calling verbindet die Entscheidungsfähigkeit eines LLMs mit der Ausführungsfähigkeit einer Anwendung.**
+
+- 🧠 **LLM** → Entscheidet, welche Funktion benötigt wird.
+- ⚙️ **Python Application** → Führt die angeforderte Funktion aus.
+- 📤 **Tool Result** → Liefert das Ergebnis zurück an das LLM.
+- 🤖 **Agent** → Kann das Ergebnis für weitere Aktionen und Entscheidungen nutzen.
