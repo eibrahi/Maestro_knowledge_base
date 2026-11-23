@@ -196,5 +196,72 @@ for field in required_fields:
 
 - 🧠 **LLM** → Entscheidet, welche Funktion benötigt wird.
 - ⚙️ **Python Application** → Führt die angeforderte Funktion aus.
+
+# 🔄 The Agentic Loop
+
+### 🤖 What is the Agentic Loop?
+
+- Der **Agentic Loop** beschreibt den wiederkehrenden Arbeitszyklus eines AI Agents, mit dem er ein definiertes Ziel schrittweise verfolgt.
+- Anders als ein klassischer Chatbot, der hauptsächlich Antworten generiert, kann ein Agent Informationen aufnehmen, Entscheidungen treffen, Aktionen ausführen und deren Ergebnisse auswerten.
+- Der Ablauf wiederholt sich so lange, bis das Ziel erreicht ist oder der Agent den Prozess beendet.
+
+### 🔄 The Five Steps of the Agentic Loop
+
+1. 👁️ **Perceive (Wahrnehmen)**
+   - Der Agent erhält eine Benutzeranfrage oder neue Informationen aus seiner Umgebung.
+   - Beispiel: Ein Benutzer meldet einen Security Incident.
+
+2. 🧠 **Reason (Überlegen)**
+   - Das LLM analysiert die verfügbaren Informationen und entscheidet, welcher nächste Schritt notwendig ist.
+   - Beispiel: Das Modell erkennt, dass weitere Incident-Daten benötigt werden.
+
+3. 🛠️ **Act (Handeln)**
+   - Das Modell fordert über einen **Function Call** die Ausführung einer bestimmten Funktion mit definierten Parametern an.
+   - Die Anwendung (z. B. Python) führt die angeforderte Funktion aus.
+   - Beispiel: Eine API wird aufgerufen, um den Incident-Status abzurufen.
+
+4. 🔍 **Observe (Beobachten)**
+   - Das Ergebnis der ausgeführten Aktion wird zurück an das LLM übergeben.
+   - Der Agent wertet die neuen Informationen aus.
+   - Beispiel: Die API meldet, dass der Incident bereits eskaliert wurde.
+
+5. 🔄 **Repeat or Stop (Wiederholen oder Beenden)**
+   - Der Agent entscheidet anhand der neuen Informationen, ob weitere Aktionen notwendig sind oder das Ziel erreicht wurde.
+   - Beispiel: Sind alle Informationen vorhanden, erstellt der Agent eine Zusammenfassung und beendet den Prozess.
+
+### 🎯 Course Correction – Kurskorrektur
+
+- **Course Correction** bedeutet, dass ein Agent seinen ursprünglichen Plan anhand neuer Beobachtungen anpassen kann.
+- Die Ergebnisse vorheriger Aktionen beeinflussen die nächsten Entscheidungen.
+- Dadurch muss ein Agent nicht einem starren Ablauf folgen, sondern kann flexibel auf unerwartete Ergebnisse reagieren.
+
+**Beispiel:**
+
+- 🔍 **Observation** → Eine API liefert keine Incident-Daten.
+- 🧠 **Re-evaluation** → Das LLM erkennt, dass die Incident-ID möglicherweise falsch ist.
+- 🔄 **Course Correction** → Der Agent fordert eine Überprüfung der ID an oder verwendet eine alternative Suchfunktion.
+- 🛠️ **Next Action** → Die Suche wird mit den korrigierten Informationen erneut ausgeführt.
+
+### ⚙️ Function Calling – Model vs. Application
+
+- **Wichtig:** Das LLM führt externe Funktionen nicht selbst aus. Es schlägt eine Aktion vor und übergibt die erforderlichen Parameter.
+- Die eigentliche Ausführung übernimmt die Anwendung.
+
+**Aufgabenteilung:**
+
+- 🧠 **LLM** → Entscheidet, welche Aktion notwendig ist, und erzeugt einen Function Call.
+- ⚙️ **Application (Python)** → Prüft und führt die angeforderte Funktion aus.
+- 📤 **Tool Result** → Liefert das Ergebnis zurück an das LLM.
+- 🔄 **LLM** → Bewertet das Ergebnis und entscheidet über den nächsten Schritt.
+
+### 🎯 Key Takeaway
+
+**Der Agentic Loop ermöglicht es einem AI Agent, komplexe Aufgaben durch wiederholtes Wahrnehmen, Überlegen, Handeln und Beobachten zielorientiert zu erledigen.**
+
+- 👁️ **Perceive** → Informationen aufnehmen.
+- 🧠 **Reason** → Nächsten Schritt bestimmen.
+- 🛠️ **Act** → Aktion über ein Tool anfordern und ausführen lassen.
+- 🔍 **Observe** → Ergebnis auswerten.
+- 🔄 **Repeat or Stop** → Plan anpassen oder Ziel abschließen.
 - 📤 **Tool Result** → Liefert das Ergebnis zurück an das LLM.
 - 🤖 **Agent** → Kann das Ergebnis für weitere Aktionen und Entscheidungen nutzen.
