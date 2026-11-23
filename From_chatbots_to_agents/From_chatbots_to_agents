@@ -1,0 +1,63 @@
+# 🤖 From Chatbots to Agents
+
+### 💬 Chatbots vs. AI Agents
+
+- **Chatbots** sind darauf ausgelegt, auf Benutzereingaben zu reagieren und passende Antworten zu generieren.
+- **AI Agents** gehen einen Schritt weiter: Sie verfolgen ein definiertes Ziel und können selbstständig mehrere Aktionen ausführen, um dieses Ziel zu erreichen.
+
+**Die wichtigsten Unterschiede:**
+
+- 💬 **Chatbot** → Reagiert auf Fragen und liefert Antworten.
+- 🎯 **Agent** → Verfolgt ein Ziel und führt aktiv Aufgaben aus.
+- 🛠️ **Tool Usage** → Agents können externe Werkzeuge und APIs nutzen, um Informationen abzurufen oder Aktionen auszuführen.
+- 🔄 **Multi-Step Reasoning** → Agents können Aufgaben in mehrere Schritte zerlegen und diese nacheinander bearbeiten.
+
+### 🎯 Goal-Oriented Behavior – Zielorientiertes Verhalten
+
+- **Goal-Oriented Behavior** bedeutet, dass ein Agent nicht nur auf eine einzelne Eingabe reagiert, sondern auf ein definiertes Ergebnis hinarbeitet.
+- Er entscheidet anhand des Ziels, welche Schritte notwendig sind, und überprüft, ob das gewünschte Ergebnis erreicht wurde.
+
+**Beispiel: Incident Management**
+
+- 💬 **Chatbot** → Erklärt, wie ein Security Incident behandelt werden sollte.
+- 🤖 **Agent** → Analysiert den Incident, sucht relevante Informationen im Runbook, prüft den Status über eine API und erstellt ein Incident-Ticket.
+
+### 🛠️ Tool Usage – Werkzeugnutzung
+
+- Agents können externe Tools verwenden, um ihre Fähigkeiten über die reine Textgenerierung hinaus zu erweitern.
+
+**Beispiele:**
+
+- 🔍 **Search APIs** → Informationen und Daten abrufen.
+- 🗄️ **Database Queries** → Datenbanken abfragen.
+- 🔌 **External APIs** → Mit anderen Systemen kommunizieren.
+- ⚙️ **Actions** → Tickets erstellen, Status aktualisieren oder Workflows auslösen.
+
+### 🔄 Multi-Step Reasoning – Mehrschrittige Aufgabenbearbeitung
+
+- **Multi-Step Reasoning** beschreibt die Fähigkeit eines Agents, komplexe Aufgaben in mehrere aufeinanderfolgende Schritte zu zerlegen.
+- Die Ergebnisse eines Schrittes dienen als Grundlage für die nächsten Aktionen.
+- Der Agent kann seinen weiteren Ablauf anhand der Zwischenergebnisse anpassen.
+
+**Typischer Agent Workflow:**
+
+1. 🎯 **Goal** → Ziel und Aufgabe verstehen.
+2. 📋 **Planning** → Notwendige Schritte festlegen.
+3. 🛠️ **Action** → Tools und APIs ausführen.
+4. 🔍 **Observation** → Ergebnisse der Aktionen überprüfen.
+5. 🔄 **Iteration** → Bei Bedarf weitere Schritte ausführen.
+6. ✅ **Completion** → Ergebnis liefern oder Aufgabe abschließen.
+
+### 🚀 From Answering to Doing
+
+- Der zentrale Unterschied beim Wechsel von Chatbots zu Agents ist der Übergang von der reinen **Informationsbereitstellung zur zielorientierten Aufgabenerledigung**.
+
+- 💬 **Chatbot** → Answers Questions.
+- 🤖 **Agent** → Achieves Goals.
+- 🛠️ **Agentic Systems** → Combine LLMs, Tools, Planning and Actions to complete complex tasks.
+
+### 🎯 Key Takeaway
+
+**Chatbots generate answers. AI Agents use reasoning and tools to accomplish goals.**
+
+Der Agent arbeitet nicht nur mit Sprache, sondern kann aktiv mit seiner Umgebung und externen Systemen interagieren.
