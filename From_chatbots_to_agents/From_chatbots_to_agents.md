@@ -95,6 +95,105 @@ Der Agent arbeitet nicht nur mit Sprache, sondern kann aktiv mit seiner Umgebung
 
 **Function Calling verbindet die Entscheidungsfähigkeit eines LLMs mit der Ausführungsfähigkeit einer Anwendung.**
 
+# 📋 Structured Outputs for Agents
+
+### 🎯 Why Structured Outputs?
+
+- **Structured Outputs** ermöglichen es einem LLM, Antworten in einem fest definierten Datenformat zu erzeugen, beispielsweise als JSON.
+- Für Agents ist das besonders wichtig, da Tools und APIs häufig **strukturierte Eingaben mit definierten Feldern und Datentypen** benötigen.
+- Freie Textausgaben sind für Menschen verständlich, aber für Anwendungen schwerer zuverlässig zu verarbeiten.
+
+**Beispiel:**
+
+- 💬 **Unstructured Output** → „Suche bitte nach dem Incident mit der ID INC-123.“
+- 📋 **Structured Output** → Ein JSON-Objekt mit den Feldern `action` und `incident_id`.
+
+### 🔄 Processing JSON with Python
+
+- **JSON (JavaScript Object Notation)** ist ein standardisiertes Datenformat für den Austausch strukturierter Informationen.
+- Mit `json.loads(...)` kann ein JSON-String in ein Python-Objekt umgewandelt werden.
+- JSON-Objekte werden in Python normalerweise als **Dictionary (`dict`)** dargestellt.
+
+**Beispiel:**
+
+```python
+import json
+
+response = '{"action": "get_incident", "incident_id": "INC-123"}'
+
+data = json.loads(response)
+
+print(data["action"])
+print(data["incident_id"])
+```
+
+**Ergebnis:**
+
+```text
+get_incident
+INC-123
+```
+
+### ⚠️ Handling Missing Fields
+
+- Ein valides JSON bedeutet nicht automatisch, dass alle benötigten Felder vorhanden sind.
+- **Missing Fields** müssen erkannt und behandelt werden, bevor die Anwendung eine Funktion oder ein Tool aufruft.
+
+**Beispiel:**
+
+```python
+required_fields = ["action", "incident_id"]
+
+for field in required_fields:
+    if field not in data:
+        raise ValueError(f"Missing field: {field}")
+```
+
+- 🔍 **Field Validation** → Prüft, ob benötigte Felder vorhanden sind.
+- 🛡️ **Type Validation** → Prüft, ob Werte den erwarteten Datentyp besitzen.
+- ⚠️ **Error Handling** → Verhindert, dass fehlerhafte Daten unkontrolliert an Tools weitergegeben werden.
+
+### 📝 Prompt Formatting vs. JSON Mode vs. Output Schemas
+
+**1. 📝 Prompt Formatting**
+
+- Das Modell wird durch eine Textanweisung aufgefordert, JSON zurückzugeben.
+- Beispiel: „Return your answer as valid JSON.“
+- **Limitation:** Das Modell kann die Anweisung trotzdem falsch interpretieren oder zusätzliche Informationen ausgeben.
+
+**2. 📋 JSON Mode**
+
+- Der API-Aufruf aktiviert einen speziellen Modus, der eine syntaktisch gültige JSON-Ausgabe sicherstellt.
+- **Limitation:** JSON Mode garantiert nicht, dass alle benötigten Felder vorhanden sind oder die Ausgabe einem bestimmten Schema entspricht.
+
+**3. 🛡️ Structured Outputs / Output Schemas**
+
+- Ein definiertes **Schema** beschreibt die erwartete Struktur, die Felder und die Datentypen.
+- Das Modell wird so eingeschränkt, dass die Ausgabe dem vorgegebenen Schema entspricht.
+- Beispiel: `action` muss ein String sein und `incident_id` muss ebenfalls ein String sein.
+
+### ⚖️ Why are Schemas More Reliable?
+
+- **Schemas definieren die erwartete Struktur explizit**, anstatt sie nur durch eine Textanweisung zu beschreiben.
+- Dadurch werden fehlerhafte oder unvollständige Tool-Argumente deutlich reduziert.
+
+**Vorteile:**
+
+- 📋 **Consistency** → Einheitliche Datenstruktur.
+- 🔍 **Validation** → Definierte Felder und Datentypen.
+- ⚙️ **Reliability** → Zuverlässigere Verarbeitung durch Python-Anwendungen und APIs.
+- 🛡️ **Error Prevention** → Weniger Fehler bei der Übergabe an Tools.
+
+**Wichtig:** Auch Structured Outputs garantieren nicht, dass die enthaltenen Informationen sachlich korrekt sind oder eine Aktion ausgeführt werden darf. Fachliche Validierung und Berechtigungsprüfungen bleiben notwendig.
+
+### 🎯 Key Takeaway
+
+**Structured Outputs verbinden die flexible Textgenerierung eines LLMs mit der zuverlässigen Datenverarbeitung einer Anwendung.**
+
+- 📝 **Prompt Formatting** → Beschreibt das gewünschte Format durch Textanweisungen.
+- 📋 **JSON Mode** → Garantiert grundsätzlich gültiges JSON, aber keine bestimmte Struktur.
+- 🛡️ **Output Schema** → Definiert die erwartete Struktur und erhöht die Zuverlässigkeit der Ausgabe.
+
 - 🧠 **LLM** → Entscheidet, welche Funktion benötigt wird.
 - ⚙️ **Python Application** → Führt die angeforderte Funktion aus.
 - 📤 **Tool Result** → Liefert das Ergebnis zurück an das LLM.
